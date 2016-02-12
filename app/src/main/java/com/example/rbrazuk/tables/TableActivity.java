@@ -26,6 +26,7 @@ public class TableActivity extends AppCompatActivity {
     private Team[] mTeams;
     public final static String TAG = TableActivity.class.getSimpleName();
 
+
     @Bind(R.id.table_recycler_view) RecyclerView mRecyclerView;
 
     @Override
@@ -54,55 +55,92 @@ public class TableActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+
                 String jsonData = response.body().string();
+
+
 
                 Log.v(TAG, jsonData);
 
                 try {
-                    JSONObject table = new JSONObject(jsonData);
-                    JSONArray standing = table.getJSONArray("standing");
+                    if(response.isSuccessful()) {
+                        mTeams = parseJsonTeam(jsonData);
 
-                    System.out.println(standing.length());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                TableAdapter adapter = new TableAdapter(getApplicationContext(),mTeams);
+                                mRecyclerView.setAdapter(adapter);
 
-                    mTeams = new Team[standing.length()];
+                                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                                mRecyclerView.setLayoutManager(layoutManager);
 
-                    for (int i = 0; i < standing.length(); i++) {
-                        JSONObject jsonTeam = standing.getJSONObject(i);
-                        Team team = new Team();
-
-                        team.setTeamName(jsonTeam.getString("teamName"));
-                        team.setPosition(jsonTeam.getInt("position"));
-                        team.setGoalDifference(jsonTeam.getInt("goalDifference"));
-                        team.setPoints(jsonTeam.getInt("points"));
-
-                        mTeams[i] = team;
-
-
+                                mRecyclerView.setHasFixedSize(true);
+                            }
+                        });
+                    }
+                    else {
+                        System.out.println("error");
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                System.out.println(mTeams);
+
 
 
             }
         });
 
 
-
-        TableAdapter adapter = new TableAdapter(this,mTeams);
-        mRecyclerView.setAdapter(adapter);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
-
-        mRecyclerView.setHasFixedSize(true);
-
+//        System.out.println(mTeams);
+//
+//        TableAdapter adapter = new TableAdapter(this,mTeams);
+//        mRecyclerView.setAdapter(adapter);
+//
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+//        mRecyclerView.setLayoutManager(layoutManager);
+//
+//        mRecyclerView.setHasFixedSize(true);
 
 
     }
 
-    
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mTeams = new Team[0];
+    }
+
+    private void getTable() {
+
+    }
+
+    private Team[] parseJsonTeam(String jsonData) throws JSONException {
+
+        JSONObject table = new JSONObject(jsonData);
+        JSONArray standing = table.getJSONArray("standing");
+
+        System.out.println(standing.length());
+
+        mTeams = new Team[standing.length()];
+
+        for (int i = 0; i < standing.length(); i++) {
+            JSONObject jsonTeam = standing.getJSONObject(i);
+            Team team = new Team();
+
+            team.setTeamName(jsonTeam.getString("teamName"));
+            team.setPosition(jsonTeam.getInt("position"));
+            team.setGoalDifference(jsonTeam.getInt("goalDifference"));
+            team.setPoints(jsonTeam.getInt("points"));
+
+            mTeams[i] = team;
+
+
+        }
+
+        return mTeams;
+    }
+
 }

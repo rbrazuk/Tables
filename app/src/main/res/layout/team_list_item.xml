@@ -8,26 +8,33 @@
         android:layout_height="wrap_content"
         android:id="@+id/positionTextView"
         android:text="20"
-        android:textSize="24sp"/>
+        android:textSize="24sp"
+        android:layout_weight="10"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/teamNameTextView"
         android:text="teamName"
         android:textSize="24sp"
+        android:layout_weight="70"
+        android:layout_gravity="center_horizontal"
+
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/goalDifferenceTextView"
         android:textSize="24sp"
-        android:text="50"/>
+        android:text="50"
+        android:layout_weight="10"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/pointsTextView"
         android:text="100"
         android:textSize="24sp"
+        android:layout_weight="10
+        "
         />
 
 </LinearLayout>

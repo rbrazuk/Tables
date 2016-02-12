@@ -17,5 +17,29 @@
         android:id="@+id/premier_league_button"
         android:text="Premier League"
         />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bundesliga_button"
+        android:text="Bundesliga"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/la_liga_button"
+        android:text="La Liga"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ligue1_button"
+        android:text="Ligue 1"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/serieA_button"
+        android:text="Serie A"
+        />
 
 </LinearLayout>
