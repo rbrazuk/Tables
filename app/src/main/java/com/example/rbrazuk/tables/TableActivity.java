@@ -44,7 +44,7 @@ public class TableActivity extends AppCompatActivity {
         String tableUrl = "http://api.football-data.org/v1/soccerseasons/" + leagueId + "/leagueTable";
 
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(tableUrl).build();
+        Request request = new Request.Builder().url(tableUrl).addHeader("X-Auth-Token","95468454664049ca81f3fc478ede7ef2").build();
 
         Call call = client.newCall(request);
         call.enqueue(new Callback() {

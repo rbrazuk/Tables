@@ -4,13 +4,16 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
     public static final String TAG = MainActivity.class.getSimpleName();
@@ -21,9 +24,11 @@ public class MainActivity extends AppCompatActivity {
     private String ligue1Id = "396";
     private String serieAId = "401";
 
+    private League[] leagues;
+
     public static final String PREMIER_LEAGUE = "PREMIER LEAGUE";
-    @Bind(R.id.premier_league_button) Button mPremierLeagueButton;
-    @Bind(R.id.bundesliga_button) Button mBundesligaButton;
+
+    @Bind(R.id.league_spinner) Spinner mSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,41 +36,64 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+
+
+        mSpinner.setSelected(false);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.leagues_array,android.R.layout.simple_spinner_item);
+
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        mSpinner.setAdapter(adapter);
+
+        mSpinner.setOnItemSelectedListener(this);
+
+
     }
 
-    @OnClick (R.id.premier_league_button)
-    public void startPremierLeagueActivity(View view) {
-        Intent intent = new Intent(this,TableActivity.class);
-        intent.putExtra(TAG, premierLeagueId);
-        startActivity(intent);
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        System.out.println(parent.getItemAtPosition(position));
+
+        String selection = parent.getSelectedItem().toString();
+        System.out.println(selection);
+
+
+        Intent intent = new Intent(MainActivity.this,TableActivity.class);
+        switch (position){
+            case 0:
+                break;
+
+            case 1:
+                intent.putExtra(TAG,premierLeagueId);
+                startActivity(intent);
+                break;
+            case 2:
+                intent.putExtra(TAG,bundesligaId);
+                startActivity(intent);
+                break;
+            case 3:
+                intent.putExtra(TAG,laLigaId);
+                startActivity(intent);
+                break;
+            case 4:
+                intent.putExtra(TAG,serieAId);
+                startActivity(intent);
+                break;
+            case 5:
+                intent.putExtra(TAG,ligue1Id);
+                startActivity(intent);
+                break;
+        }
+
+
+
+
     }
 
-    @OnClick (R.id.bundesliga_button)
-    public void startBundesligaActivity(View view) {
-        Intent intent = new Intent(this,TableActivity.class);
-        intent.putExtra(TAG, bundesligaId);
-        startActivity(intent);
-    }
-    @OnClick (R.id.bundesliga_button)
-    public void startLaLigaActivity(View view) {
-        Intent intent = new Intent(this,TableActivity.class);
-        intent.putExtra(TAG, laLigaId);
-        startActivity(intent);
-    }
-    @OnClick (R.id.bundesliga_button)
-    public void startLigue1Activity(View view) {
-        Intent intent = new Intent(this,TableActivity.class);
-        intent.putExtra(TAG, ligue1Id);
-        startActivity(intent);
-    }
-    @OnClick (R.id.bundesliga_button)
-    public void startSerieAActivity(View view) {
-        Intent intent = new Intent(this,TableActivity.class);
-        intent.putExtra(TAG, serieAId);
-        startActivity(intent);
-    }
-
-    private void getTable(String leagueName) {
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }
