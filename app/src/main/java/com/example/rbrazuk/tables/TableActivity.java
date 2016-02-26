@@ -94,15 +94,7 @@ public class TableActivity extends AppCompatActivity {
         });
 
 
-//        System.out.println(mTeams);
-//
-//        TableAdapter adapter = new TableAdapter(this,mTeams);
-//        mRecyclerView.setAdapter(adapter);
-//
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-//        mRecyclerView.setLayoutManager(layoutManager);
-//
-//        mRecyclerView.setHasFixedSize(true);
+
 
 
     }

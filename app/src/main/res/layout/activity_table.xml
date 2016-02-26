@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#01FF87"
+
     tools:context="com.example.rbrazuk.tables.TableActivity">
 
     <TextView
@@ -12,11 +12,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/positionTextView"
         android:text="Pos"
+        android:paddingLeft="5dp"
         android:textStyle="bold"
         android:textSize="20sp"
         android:textColor="#BF000000"
         />
     <TextView
+        android:paddingLeft="5dp"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:id="@+id/teamNameTextView"
@@ -29,6 +31,7 @@
         android:layout_toRightOf="@+id/positionTextView"
         android:layout_toEndOf="@+id/positionTextView"/>
     <TextView
+        android:paddingRight="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/goalDifferenceTextView"
@@ -41,6 +44,7 @@
         android:textStyle="bold"
         android:textColor="#BF000000"/>
     <TextView
+        android:paddingRight="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/pointsTextView"
@@ -55,6 +59,7 @@
 
 
     <android.support.v7.widget.RecyclerView
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/table_recycler_view"
